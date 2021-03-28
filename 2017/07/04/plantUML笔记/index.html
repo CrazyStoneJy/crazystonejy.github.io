@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"crazystonejy.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="plantUML是在markdown语法上实现绘制uml图的工具 绘制流程图的笔记 流程标签(activity label)以冒号开始，以分号结束,例如：　:第一步; 使用关键字start和stop表示图示的开始和结束。@startumlstart:Hello world;:This is on defined onseveral lines;stop@enduml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="plantUML笔记">
+<meta property="og:url" content="http://crazystonejy.github.io/2017/07/04/plantUML%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="CrazyStone&#39;s Blog">
+<meta property="og:description" content="plantUML是在markdown语法上实现绘制uml图的工具 绘制流程图的笔记 流程标签(activity label)以冒号开始，以分号结束,例如：　:第一步; 使用关键字start和stop表示图示的开始和结束。@startumlstart:Hello world;:This is on defined onseveral lines;stop@enduml">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-07-04T12:46:27.000Z">
+<meta property="article:modified_time" content="2018-11-28T07:45:01.922Z">
+<meta property="article:author" content="CrazyStone">
+<meta property="article:tag" content="plantUML">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://crazystonejy.github.io/2017/07/04/plantUML%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>plantUML笔记 | CrazyStone's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">CrazyStone's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://crazystonejy.github.io/2017/07/04/plantUML%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CrazyStone">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CrazyStone's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          plantUML笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-07-04 20:46:27" itemprop="dateCreated datePublished" datetime="2017-07-04T20:46:27+08:00">2017-07-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-11-28 15:45:01" itemprop="dateModified" datetime="2018-11-28T15:45:01+08:00">2018-11-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/other/" itemprop="url" rel="index"><span itemprop="name">other</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>plantUML是在markdown语法上实现绘制uml图的工具</p>
+<h3 id="绘制流程图的笔记"><a href="#绘制流程图的笔记" class="headerlink" title="绘制流程图的笔记"></a>绘制流程图的笔记</h3><ul>
+<li>流程标签(activity label)以冒号开始，以分号结束,例如：<br>　:第一步;<img  src=http://www.plantuml.com/plantuml/svg/itg-PisJ7GtFrYwr1W00></li>
+<li>使用关键字start和stop表示图示的开始和结束。<br>@startuml<br>start<br>:Hello world;<br>:This is on defined on<br>several <strong>lines</strong>;<br>stop<br>@enduml</li>
+</ul>
+<a id="more"></a> 
+
+<img  src=http://www.plantuml.com/plantuml/svg/SoWkIImgAStDuG8pkAmyKdDoyXNAyujoKgovh48oCeiLW2W_Jo4bDIqpBpK5oEGgJYrBBKhCKT3IoW4A5MjfMGDrvnTmEQJcfG2D0W00>
+<ul>
+<li>使用关键字if，then和else设置分支测试。标注文字则放在括号中.<br>@startuml<br>start<br>if (Graphviz installed?) then (yes)<br>:process all\ndiagrams;<br>else (no)<br>:process only<br><strong>sequence</strong> and <strong>activity</strong> diagrams;<br>endif<br>stop<br>@enduml</li>
+</ul>
+<img  src=http://www.plantuml.com/plantuml/svg/JOuz2iCm38LtdK9ZSeLsQBPUeY2ChJG2HtOj9-2Ulg9Jje_tnrkiXzQFFSCVG5QSdYtKxPGlYhgOCwV7Z7rZnMcmpN2hhKGsG_TUcYIyMzZj3foDST9oIHJD0uYCFmThP28Ccf0en2wdzE72fUzRg_ye5HPdF_K3>
+<ul>
+<li>使用关键字repeat和repeatwhile进行重复循环<br>@startuml<br>start<br>repeat<br>:read data;<br>:generate diagrams;<br>repeat while (more data?)<br>stop<br>@enduml</li>
+</ul>
+<img  src=http://www.plantuml.com/plantuml/svg/BSnB2i0W34NHULRXiDs23kfM0dbOmHynfTklI6TtSBXn6gizjT0EKWomaLUmE67ZG3wXGTdW97DIhZFypBrtBd17xOgDhtDj-g289klv0G00>
+<ul>
+<li>使用关键字while和end while进行while循环<br>@startuml<br>start<br>while (data available?)<br>:read data;<br>:generate diagrams;<br>endwhile<br>stop<br>@enduml</li>
+</ul>
+<img  src=http://www.plantuml.com/plantuml/svg/7On13e0W30JlVKMF-WKuo5VMq219GGDLlozocvra9tH3ixieJQ3to2gyH1WO3x9YLzbMSaqG-TUUN98g3IOSCr93wPwandaTcVEYCEPeVW00>
+<ul>
+<li>还可以在关键字endwhile后添加标注，还有一种方式是使用关键字is。<br>@startuml<br>while (check filesize ?) is (not empty)<br>:read file;<br>endwhile (empty)<br>:close file;<br>@enduml</li>
+</ul>
+<img  src=http://www.plantuml.com/plantuml/svg/SoWkIImgAStDuIhFoCn9LT18paXDpbP80xABCwjI5Umr5JAB5JJoyaiKKdCBIYerkHGKh8fI4rF0IgovKlDIe1gXqbR9EVd5gL1P1w0qq6m0>
+
+<ul>
+<li>使用关键字fork，fork again和end fork表示并行处理。<br>@startuml<br>start<br>if (multiprocessor?) then (yes)<br>fork<br>:Treatment 1;<br>fork again<br>:Treatment 2;<br>end fork<br>else (monoproc)<br>:Treatment 1;<br>:Treatment 2;<br>endif<br>@enduml</li>
+</ul>
+<img  src=http://www.plantuml.com/plantuml/svg/POwn3eCm34HtVuL7ChPZ6U0Z-WDHSI1gObUs6VZxXco8wKvtkgURpQFwNWjq0pdXKFVY-QVo8JFHAQ1ln3WSP06Iw1SGNs-bw9NOyJ7s4ECQCr-hvmZ42_OD5QE65fQJ7E1Ak8roWhb9E_O7>
+
+<ul>
+<li>注释note right|left xxxx  note end<br>@startuml<br>start<br>:foo1;<br>floating note left: This is a note<br>:foo2;<br>note right<br>This note is on several<br>//lines// and can<h1 id="contain-HTML"><a href="#contain-HTML" class="headerlink" title="contain HTML"></a>contain <b>HTML</b></h1></li>
+</ul>
+<ul>
+<li>Calling the method “”foo()”” is prohibited<br>end note<br>stop<br>@enduml</li>
+</ul>
+<img  src=http://www.plantuml.com/plantuml/svg/7Kyn3i8m3Dpz2YiJi4GmjgL2Oc60hHzmMxU9bCPLOdW_QInBlhDET_OZAoNzRW4gW6OHkRQm127rSSKeoXXuqGO7vpEMfhgiobiBLP3ywXIgeF8o9MBc7oSAO6tmaRErI776YI9C4fLyn6xiNyFdtTcnXtifkE2JGZY2rJ5kh4vcDAP4dSx67Bvx4kT7hpm35xTwIbRPuL5e-UCF>
+
+<ul>
+<li>为活动(activity)指定一种颜色<br>@startuml<br>start<br>:starting progress;<br>#HotPink:reading configuration files<br>These files should edited at this point!;<br>#AAAAAA:ending of the process;<br>@enduml</li>
+</ul>
+<img  src=http://www.plantuml.com/plantuml/svg/9Kun3WCX3DjvHQh-WYxNhME7VW0T0QBIv9I4_vVZlDYo9TkRUL8VlnwM274HSOL3fIgQFSBz9Vuc_aR5bCze5ovKXoOdOIZKqSAdeU6bmPgCdW4pEMP83jx8u11Ylyswvq94NcLIPepdtBxMjkdFFty0>
+
+<ul>
+<li>使用-&gt;标记，你可以给箭头添加文字或者修改箭头颜色<br>@startuml<br>:foo1;</li>
+<li><blockquote>
+<p>You can put text on arrows;<br>if (test) then</p>
+</blockquote>
+</li>
+<li>[#blue]-&gt;<br>:foo2;</li>
+<li>[#green,dashed]-&gt; The text can<br>also be on several lines<br>and <strong>very</strong> long…;<br>:foo3;<br>else</li>
+<li>[#black,dotted]-&gt;<br>:foo4;<br>endif</li>
+<li>[#gray,bold]-&gt;<br>:foo5;<br>@enduml</li>
+</ul>
+<img  src=http://www.plantuml.com/plantuml/svg/DO_B3e8m44Nt_Of9t6W39BusDY5yX1jZN1Gw2B5sJ3ke_Bqju7BkkJapKmNMdeUd5QUMQAj4NiA51cYqWzV0mFXb80VQU_e49VeMreo1Dy0TEW6GNrUr7V2Mbt58ZfsQqxj7T9dHeKCJAPmxd6rH7HlQ1e8QaplW6xssO7k78I5dGCgOZLA29NSlYa8jzhqIQ0F-5-lcaHbYdbOibKEiEDEtOZf2ZrbDTi897fMe8eqF_m00>
+
+<ul>
+<li>使用管道符|来定义泳道,还可以改变泳道的颜色。<br>@startuml<br>|Swimlane1|<br>start<br>:foo1;<br>|#AntiqueWhite|Swimlane2|<br>:foo2;<br>:foo3;<br>|Swimlane1|<br>:foo4;<br>|Swimlane2|<br>:foo5;<br>stop<br>@enduml</li>
+</ul>
+<img  src=http://www.plantuml.com/plantuml/svg/SoWkIImgAStDuQe9Bi_CpKdCIpMiuG8BSbcbvUSRMdFLA3lcbMGMbgQ6PsIMfCAL6TM05HXPWobZQnG3G48cI49GnQRMGAFp2xWSKlDIW7O20000>
+
+<h3 id="一个完整的例子"><a href="#一个完整的例子" class="headerlink" title="一个完整的例子"></a>一个完整的例子</h3><p>@startuml<br>start<br>:ClickServlet.handleRequest();<br>:new page;<br>if (Page.onSecurityCheck) then (true)<br>:Page.onInit();<br>if (isForward?) then (no)<br>  :Process controls;<br>  if (continue processing?) then (no)<br>    stop<br>  endif<br>  if (isPost?) then (yes)<br>    :Page.onPost();<br>  else (no)<br>    :Page.onGet();<br>  endif<br>  :Page.onRender();<br>endif<br>else (false)<br>endif<br>if (do redirect?) then (yes)<br>:redirect process;<br>else<br>if (do forward?) then (yes)<br>  :Forward request;<br>else (no)<br>  :Render page template;<br>endif<br>endif<br>stop<br>@enduml</p>
+<img  src=http://www.plantuml.com/plantuml/svg/NL7DRiCW3Bxp53ucbpu0ERHIfKsxHUqJ8E8qg1GoR5RrxGS4kYaNOlpzvCC-4Ql0yM55AOGyMwFlLmm_5lcmA3TPlE1tHEAk7uHq-8HLtN0GPePkJDN1kolg60o_pWlgUm-ye8EEGyHUo4hvSgOOP9MX3n-UAap7ndM-5m1o35uZ4MZlE7XBGsfcGRuR5n7MZM3SRIS58FPhAj1DPguoGwCdVZDVI1krPSfepfHKbl3Fgk6VsE1gse1BQc38s8PiybcbJrzR-V-JXu2J2QXt8MHhjmSDnQA9vjrqQd1PfvPCopu6yJ-st4ALvG3ZOxMAyHsmd6L4frIdTVy2>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/plantUML/" rel="tag"># plantUML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/07/03/ubuntu%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="prev" title="ubuntu快捷键">
+      <i class="fa fa-chevron-left"></i> ubuntu快捷键
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/14/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%98%BE%E7%A4%BAplantuml/" rel="next" title="hexo博客中显示plantuml">
+      hexo博客中显示plantuml <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%9A%84%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">绘制流程图的笔记</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#contain-HTML"><span class="nav-number"></span> <span class="nav-text">contain HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">一个完整的例子</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CrazyStone</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CrazyStone</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
